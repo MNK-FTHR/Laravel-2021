@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class TaskUser extends Model
 {
     use HasFactory;
+    
+    public function Task()
+    {
+        return $this -> belongsTo('App\Models\Task');
+    }
+
+    public function User()
+    {
+        return $this -> belongsTo('App\Models\User');
+    }
 }

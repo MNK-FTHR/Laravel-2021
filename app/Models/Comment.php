@@ -8,11 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    public function belongTo(){
-        return $this->belongsTo('App\Models\User', 'foreign_key');
+    public $text = [
+        'text',
+
+    ];
+
+    protected $hidden = [
+        'user_id',
+        'task_id',
+    ];
+    public function User(){
+        return $this->belongsTo('App\Models\User');
     }
 
-    public function creator(){
-        return $this->hasOne('App\Models\User', 'foreign_key');
+    public function Task(){
+        return $this->belongsTo(Task::class);
     }
 }

@@ -14,7 +14,7 @@ class BoardUser extends Model
         return $this -> belongsTo('App\Models\User');
     }
 
-    public function Task()
+    public function Tasks()
     {
         return $this -> hasMany(Task::class);
     }

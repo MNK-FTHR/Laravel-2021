@@ -9,9 +9,23 @@ class Board extends Model
 {
     
     use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $fillable = [
+        'title',
+        'description',
+    ];
 
-    public function Task()
+    public function Tasks()
     {
         return $this -> hasMany(Task::class);
+    }
+
+    public function Users()
+    {
+        return $this -> belongsToMany('App\Models\User');
     }
 }
