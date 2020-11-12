@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskUserTable extends Migration
+class CreateBoardUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTaskUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_user', function (Blueprint $table) {
+        Schema::create('board_users', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
-            $table->integer("task_id");
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('board_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,7 @@ class CreateTaskUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_users');
+        Schema::dropIfExists('board_users');
+
     }
 }

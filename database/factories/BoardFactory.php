@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Board;
 use App\Models\User;
+use App\Models\BoardUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
 
@@ -24,7 +25,7 @@ class BoardFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->word,
+            'title' => $this->faker->title,
             'description' => $this->faker->sentence,
             'user_id'=> \App\Models\User::factory(),
         ];

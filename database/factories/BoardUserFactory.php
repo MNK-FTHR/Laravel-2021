@@ -5,6 +5,8 @@ namespace Database\Factories;
 use App\Models\BoardUser;
 use App\Models\Board;
 use App\Models\User;
+use App\Models\Task;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BoardUserFactory extends Factory

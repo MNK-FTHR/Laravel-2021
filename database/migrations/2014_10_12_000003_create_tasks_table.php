@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->date('due_date');
             $table->enum('state',['todo','in progress','done']);
             $table->foreignId('category_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('board_id');
+            $table->foreignId('board_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class CreateBoardsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }
