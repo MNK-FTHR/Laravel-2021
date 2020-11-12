@@ -8,15 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    public $text = [
-        'text',
-
-    ];
-
-    protected $hidden = [
-        'user_id',
-        'task_id',
-    ];
+    /**
+     * Un comment possède un utilisateur et est sur une task
+     *
+     * @return void
+     */
     public function User(){
         return $this->belongsTo('App\Models\User');
     }

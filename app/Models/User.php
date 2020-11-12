@@ -40,6 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * un user a des taches assignés des com des attachments et des boards
+     *
+     * @return void
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -53,5 +59,10 @@ class User extends Authenticatable
     public function boards()
     {
         return $this->hasMany(Board::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }

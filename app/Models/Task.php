@@ -8,16 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-    public  $text = [
-        'title',
-        'Description',
-        'state',
-    ];
-
-    protected $hidden = [
-        'user_id',
-        'task_id',
-    ];
+    /**
+     * Une task appartien a un user, a plusieurs users qui 'takes part' peut posseder des com et des attachments et appartiennent a une category et un board
+     *
+     * @return void
+     */
 
     public function user(){
         return $this->belongsTo('App\Models\User');

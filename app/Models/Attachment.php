@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     use HasFactory;
+    /**
+     * Un attachment appartien à un user et à sa task
+     * 
+     * @return void
+     */
     public function user(){
         return $this->belongsTo('App\Models\User');
     }

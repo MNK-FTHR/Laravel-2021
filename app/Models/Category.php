@@ -10,14 +10,10 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $text = [
-        'name',
-    ];
-
     /**
-     * Renvoi la liste des tâches possédant cette catégorie
+     * Une category possède many tasks
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return void
      */
     public function tasks()
     {

@@ -9,24 +9,23 @@ class Board extends Model
 {
     
     use HasFactory;
-
-    public $fillable = [
-        'title',
-        'description',
-    ];
-
-    public function Tasks()
+    /**
+     * Le board appartien à l'owner qu'on reconnais a son id, possède many tasks et many users sont dessus
+     * 
+     * @return void
+     */
+    public function tasks()
     {
         return $this -> hasMany(Task::class);
     }
 
-    public function user()
+    public function owner()
     {
-        return $this -> belongsTo('App\Models\User');
+        return $this -> belongsTo('App\Models\User', 'user_id');
     }
 
     public function users()
     {
-        return $this -> belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->using(BoardUser::class);
     }
 }
