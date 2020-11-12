@@ -20,22 +20,22 @@ class Task extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\Models\User', 'foreign_key');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function creator(){
-        return $this->hasOne('App\Models\User', 'foreign_key');
+        return $this->hasOne('App\Models\User');
     }
 
     public function takingPart(){
         return $this->hasMany('App\Models\User');
     }
 
-    public function Comment(){
+    public function comments(){
         return $this->hasMany(Comment::class);
     }
     
-    public function Attachment(){
+    public function attachments(){
         return $this->hasMany(Attachment::class);
     }
 
@@ -44,7 +44,7 @@ class Task extends Model
         return $this -> belongsTo('App\Models\Board');
     }
 
-    public function Category(){
-        return $this->hasOne('App\Model\Category', 'foreign_key');
+    public function category(){
+        return $this-> belongsTo(Category::class);
     }
 }

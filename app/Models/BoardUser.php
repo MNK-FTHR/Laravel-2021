@@ -16,7 +16,7 @@ class BoardUser extends Model
 
     public function Tasks()
     {
-        return $this -> hasMany(Task::class);
+        return $this -> hasMany('App\Models\Task');
     }
 
     public function Board()

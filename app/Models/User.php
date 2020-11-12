@@ -54,4 +54,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Board::class);
     }
+
+    public function owner(){
+        
+    }
 }

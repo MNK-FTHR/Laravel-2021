@@ -13,6 +13,6 @@ class Attachment extends Model
     }
 
     public function task(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\Task');
     }
 }
