@@ -27,7 +27,7 @@ class AttachmentFactory extends Factory
             'file' => $this->faker->word,
             'filename' => $this->faker->text,
             'size' => $this->faker->randomDigit,
-            'type'=> $this->faker->fileExtension,
+            'type'=> $this->faker->mimeType,
             'user_id'=> \App\Models\User::factory(),
             'task_id'=> \App\Models\Task::factory(),
         ];
