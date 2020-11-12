@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Task;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaskFactory extends Factory
@@ -26,8 +28,8 @@ class TaskFactory extends Factory
             'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'due_date'=> $this->faker->dateTimeThisMonth($max = 'now', $timezone = null),
             'state' => $this->faker->randomElement($array = array ('todo','in progress','done')),
-            'category_id' => Category::factory(),
-            'board_id' => Board::factory(),
+            'category_id' => \App\Models\Category::factory(),
+            'board_id' => \App\Models\Board::factory(),
         ];
     }
 }

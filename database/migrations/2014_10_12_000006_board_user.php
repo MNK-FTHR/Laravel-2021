@@ -15,10 +15,8 @@ class BoardUser extends Migration
     {
         Schema::create('board_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('board_id')->unsigned()->index();
-            $table->foreign('board_id')->references('id')->on('boards')->onDelete('cascade');
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('board_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

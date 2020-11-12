@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttachmentsTable extends Migration
+class CreateBoardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateAttachmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
-            $table->integer("task_id");
-            $table->string('file');
-            $table->string('filename');
-            $table->integer("size");
-            $table->string('type'); 
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('title');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateAttachmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachments');
+        Schema::dropIfExists('boards');
     }
 }

@@ -9,10 +9,10 @@ class Attachment extends Model
 {
     use HasFactory;
     public function user(){
-        return $this->belongsTo('App\Models\User', 'foreign_key');
+        return $this->belongsTo('App\Models\User');
     }
 
-    public function creator(){
-        return $this->hasOne('App\Models\User', 'foreign_key');
+    public function task(){
+        return $this->belongsTo('App\Models\User');
     }
 }
