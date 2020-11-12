@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttachmentTable extends Migration
+class CreateTaskUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachment', function (Blueprint $table) {
+        Schema::create('task_user', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('file_name');
+            $table->integer("user_id");
+            $table->integer("task_id");
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateAttachmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachment');
+        Schema::dropIfExists('task_users');
     }
 }

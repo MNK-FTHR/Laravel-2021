@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Board;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Generator as Faker;
 
 class BoardFactory extends Factory
 {
@@ -21,6 +22,7 @@ class BoardFactory extends Factory
      */
     public function definition()
     {
+        
         return [
             'title' => $this->faker->word,
             'description' => $this->faker->sentence
