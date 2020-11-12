@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Board;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as Faker;
 
-class BoardFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Board::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +22,7 @@ class BoardFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->word,
-            'description' => $this->faker->sentence
+            'text' => $this->faker->sentence($nbWords = 6, $variableNbWords = true)
         ];
     }
 }
