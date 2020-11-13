@@ -24,9 +24,9 @@ class AttachmentFactory extends Factory
     public function definition()
     {
         return [
-            'file' => $this->faker->word,
-            'filename' => $this->faker->text,
-            'size' => $this->faker->randomDigit,
+            'file' => base64_encode($this->faker->text),
+            'filename' => $this->faker->word,
+            'size' => rand(0, 4096),
             'type'=> $this->faker->mimeType,
             'user_id'=> \App\Models\User::factory(),
             'task_id'=> \App\Models\Task::factory(),

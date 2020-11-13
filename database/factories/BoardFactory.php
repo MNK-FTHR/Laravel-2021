@@ -25,8 +25,8 @@ class BoardFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title,
-            'description' => $this->faker->sentence,
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->text,
             'user_id'=> \App\Models\User::factory(),
         ];
     }

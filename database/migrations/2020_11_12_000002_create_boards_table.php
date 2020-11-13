@@ -15,9 +15,11 @@ class CreateBoardsTable extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            // $table->unsignedBigInt('user_id');
+            // $table->foreign('user_id')->references("id")->on(('user'))->setNullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
