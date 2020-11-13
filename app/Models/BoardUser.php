@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class BoardUser extends Model
+class BoardUser extends Pivot
 {
     use HasFactory;
+
     /**
      * Lien entre User et board
      * 
