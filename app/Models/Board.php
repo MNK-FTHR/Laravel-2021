@@ -7,25 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Board extends Model
 {
-    
     use HasFactory;
-    /**
-     * Le board appartien à l'owner qu'on reconnais a son id, possède many tasks et many users sont dessus
-     * 
-     * @return void
-     */
-    public function tasks()
-    {
-        return $this -> hasMany(Task::class);
-    }
 
+
+    /**
+     * Renvoie l'utilisateur propriétaire du board (celui qui l'a créé)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function owner()
     {
-        return $this -> belongsTo('App\Models\User', 'user_id');
-    }
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    } 
 
+
+    /**
+     * Renvoie tous les utilisateurs qui sont asssociés au board
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
-        return $this->belongsToMany(User::class)->using(BoardUser::class);
+        return $this->belongsToMany('App\Models\User')
+                    ->using("App\Models\BoardUser")
+                    ->withPivot("id")
+                    ->withTimestamps();
     }
+
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
+
 }

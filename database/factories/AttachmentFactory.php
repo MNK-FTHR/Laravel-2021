@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Attachment;
-use App\Models\User;
-use App\Models\Task;
+use App\Models\{Attachment, Task, User};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AttachmentFactory extends Factory
@@ -23,13 +21,18 @@ class AttachmentFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'file' => base64_encode($this->faker->text),
-            'filename' => $this->faker->word,
-            'size' => rand(0, 4096),
-            'type'=> $this->faker->mimeType,
-            'user_id'=> \App\Models\User::factory(),
-            'task_id'=> \App\Models\Task::factory(),
-        ];
+        {
+            return [
+                'user_id' => User::factory(),
+                'task_id' => Task::factory(), 
+                'file' => base64_encode($this->faker->text),
+                'filename' => $this->faker->file($sourceDir = '.', $targetDir = '/tmp', false), 
+                'type' => $this->faker->mimeType(),
+                'size' => 256,
+                'created_at' => now(),
+                'updated_at' => now(),
+    
+            ];
+        }
     }
 }

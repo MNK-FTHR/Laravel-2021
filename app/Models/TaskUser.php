@@ -4,23 +4,47 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\{Task, User};
 
+/**
+ * Classe pivot qui met en relation les tâches et les utilisateurs
+ * 
+ * @author Nicolas Faessel <nicolas.faessel@ynov.com>
+ * 
+ */
 class TaskUser extends Pivot
 {
-    use HasFactory;
+    //
+    use HasFactory; 
+
 
     /**
-     * Liens entre task et user
+     * Indicates if the IDs are auto-incrementing.
      *
-     * @return void
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#defining-custom-intermediate-table-models
+     * @var bool
      */
-    public function Task()
+    public $incrementing = true;
+
+    /**
+     * Renvoi l'utilisateur lié à la tâche
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
     {
-        return $this -> belongsTo('App\Models\Task');
+        return $this->belongsTo(User::class);
     }
 
-    public function User()
+
+    /**
+     * Renvoi la tâche liée à l'utilisateur
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function task()
     {
-        return $this -> belongsTo('App\Models\User');
+        return $this->belongsTo(Task::class);
     }
+
 }

@@ -11,9 +11,9 @@ class Category extends Model
     use HasFactory;
 
     /**
-     * Une category possède many tasks
+     * Renvoi la liste des tâches possédant cette catégorie
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tasks()
     {

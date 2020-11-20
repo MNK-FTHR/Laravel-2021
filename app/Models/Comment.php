@@ -4,20 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
+/**
+ * Représente un commentaire rédigé sur une tâche par un utilisateur
+ * 
+ * @author Nicolas Faessel <nicolas.faessel@ynov.com>
+ * 
+ */
 class Comment extends Model
 {
     use HasFactory;
+
     /**
-     * Un comment possède un utilisateur et est sur une task
+     * Renvoi l'utilisateur qui a écrit le commentaire
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function User(){
-        return $this->belongsTo('App\Models\User');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function Task(){
-        return $this->belongsTo(Task::class);
+
+    /**
+     * Renvoi la tâche à laquelle est associé le commentaire
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function task()
+    {
+        return $this->belongsTo('App\Models\Task');
     }
 }

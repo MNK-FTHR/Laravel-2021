@@ -1,22 +1,12 @@
 <?php
- 
+
 namespace App\Providers;
- 
+
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
- 
+use Illuminate\Support\Facades\DB;
+
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Schema::defaultStringLength(191);
-    }
- 
     /**
      * Register any application services.
      *
@@ -25,5 +15,21 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        if (env("APP_DEBUG"))
+        {
+            DB::listen(function ($query) {
+                echo("DB: " . $query->sql . "[".  implode(",",$query->bindings). "]\n");
+            });
+        }
+    
     }
 }
