@@ -15,9 +15,10 @@ class BoardController extends Controller
      */
     public function index()
     {
-        // On récupérer tous les boards auxquels participe l'utilisateur connecté 
+        // Renvoi une vue à laquelle on transmet les boards de l'utilisateurs (ceux auxquels il participe)
         $user = Auth::user();
-        return view('boards.index', ['boards' =>  $user->boards]);
+        return view('boards.index', ['user' => $user]);
+
     }
 
     /**
@@ -27,29 +28,33 @@ class BoardController extends Controller
      */
     public function create()
     {
-        // renvoi le formulaire de création d'un board
+        //
         return view('boards.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * Permet de stocker un nouveau board pour l'utilisateur dans la base de données
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'max:4096',
+            'title' => 'required|string|max:255', 
+            'description' => 'max:4096'
         ]);
         $board = new Board(); 
+        $board->title = $validatedData['title'];
+        $board->description = $validatedData['description'];
         $board->user_id = Auth::user()->id; 
-        $board->title = $validatedData['title']; 
-        $board->description = $validatedData['description']; 
-        $board->save();
-        return redirect()->route('boards.index');
+
+        $board->save(); 
+        return redirect('/boards');
+        
     }
 
     /**
@@ -60,8 +65,7 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
-        //
-        return view("boards.show", ["board" => $board]);
+        return view('boards.show', ['board' => $board]);
     }
 
     /**
@@ -87,14 +91,15 @@ class BoardController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'max:4096',
-        ]);
+                'title' => 'required|string|max:255', 
+                'description' => 'max:4096'
+            ]
+        );
         $board->title = $validatedData['title']; 
         $board->description = $validatedData['description']; 
-        $board->update();
+        $board->update(); 
 
-        return redirect()->route('boards.index');
+        return redirect('/boards');
     }
 
     /**
@@ -106,7 +111,7 @@ class BoardController extends Controller
     public function destroy(Board $board)
     {
         //
-        $board->delete(); 
-        return redirect()->route('boards.index');
+        $board->delete();
+        return redirect('/boards');
     }
 }
