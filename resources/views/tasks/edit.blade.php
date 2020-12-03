@@ -1,22 +1,22 @@
 @extends('layouts.main')
 
-@section('title', "Edit a board for an user")
+@section('title', "Edit a task for an user")
 
 
 @section('content')
-    <h2>Éditer un board</p>
-        <form action="{{route('boards.update', $board)}}" method="POST">
+    <h2>Éditer une task</p>
+        <form action="{{route('tasks.update', $task)}}" method="POST">
             @method('PUT')
             @csrf
             <label for="title">Title</label>
             <input type="text" name='title' 
-                    id ='title' value="{{$board->title}}"
+                    id ='title' value="{{$task->title}}"
                     class="@error('title') is-invalid @enderror" required><br>
             @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <label for="description">Description</label>
-            <input type="text" name='description' id ='description' value="{{$board->description}}"
+            <input type="text" name='description' id ='description' value="{{$task->description}}"
                     class="@error('description') is-invalid @enderror"><br>
             <button type="submit">Update</button>
         </form>

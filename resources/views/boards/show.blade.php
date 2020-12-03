@@ -1,17 +1,11 @@
 @extends('layouts.main')
 
-@section('title', "User's board {{$board->title}}")
+@section('title', "THE board")
 
 
 @section('content')
-    <h2>{{$board->title}}<h2>
-    <p>{{$board->description}}</p>
-    <div class="participants">
-        @foreach($Sponsor->sponsors as $sponsor) 
-            <div class="card-body">
-                <img class="w-20 h-20">{{$sponsor->photo}}</img>
-            </div>
-        @endforeach
-    </div>
-
+    <h2>Bienvenu dans le board {{$board->title}}</h2>
+    @foreach ($board->users as $user)
+        <p>{{ $user->name }}</p>
+    @endforeach
 @endsection
