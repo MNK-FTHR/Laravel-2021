@@ -47,8 +47,16 @@ class TaskController extends Controller
             'category_id' => 'default:null|integer|exists:categories,id',
             'board_id' => 'integer|required|exists:boards,id'
         ]);
+        $user = Auth::user();
+
+        $task = new Task(); 
+        $task->title = $validatedData['title'];
+        $task->description = $validatedData['description'];
+        //$task->due_date = ; 
+        //$task->category_id = ; 
+        //$task->board_id = ; 
         // TODO : il faut vérifier que le board appartient bien à l'utilisateur :(
-       
+        $id = (!$user->id) ? abort(403) : $task->save() ;
         Task::create($validatedData); // Nouvelle méthode création, sans avoir à affecter propriété par propriété
     }
 

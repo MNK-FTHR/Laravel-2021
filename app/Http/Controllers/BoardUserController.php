@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 class BoardUserController extends Controller
 {
-    //
+    //PREMIERE PISTE POUR 'faire en sorte que seul le propriétaire d'un board puisse ajouter/supprimer des utilisateurs participant au board'
+    if (Gate::any(['store', 'delete'], $post)) {
+        Auth::user()->id;
+    }
+    
+    if (Gate::none(['store', 'delete'], $post)) {
+        $boardUser;
+    }
 
     /**
      * Ajoute un utilisateur dans un board en utilisant le modèle pivot BoardUser

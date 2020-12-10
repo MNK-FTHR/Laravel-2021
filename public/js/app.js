@@ -21304,8 +21304,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/niko/Documents/cours/ynov/2020-2021/framework-php/laravel-pojects-nosync/todo-b2-students-nosync/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/niko/Documents/cours/ynov/2020-2021/framework-php/laravel-pojects-nosync/todo-b2-students-nosync/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\Victor\Documents\GitHub\Laravel-2021\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Victor\Documents\GitHub\Laravel-2021\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
