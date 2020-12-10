@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\{Task, Category, Board};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,10 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // Renvoi une vue à laquelle on transmet les tasks de l'utilisateurs (ceux auxquels il participe)
-        $user = Auth::user();
-        return view('tasks.index', ['user' => $user]);
-
+        //
     }
 
     /**
@@ -29,36 +26,68 @@ class TaskController extends Controller
     public function create()
     {
         //
-        return view('tasks.create');
+        $user = Auth::user();
+        $categories = Category::all();
+        return view('tasks.create', ["user" => $user, "categories" => $categories]); 
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
-     * Permet de stocker une nouvelle task pour l'utilisateur dans la base de données
-     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        
+        //
         $validatedData = $request->validate([
             'title' => 'required|string|max:255', 
-            'description' => 'max:4096',
-            'due_date' => ''
+            'description' => 'max:4096', 
+            'due_date' => 'required|date|after:today',
+            'category_id' => 'default:null|integer|exists:categories,id',
+            'board_id' => 'integer|required|exists:boards,id'
         ]);
-        $task = new Task(); 
-        $task->title = $validatedData['title'];
-        $task->description = $validatedData['description'];
-        $task->due_date = $validatedData['due_date'];
-        $task->user_id = Auth::user()->id; 
-
-        $task->save(); 
-        return redirect('/tasks');
-        
+        // TODO : il faut vérifier que le board appartient bien à l'utilisateur :(
+       
+        Task::create($validatedData); // Nouvelle méthode création, sans avoir à affecter propriété par propriété
     }
-    
+
+    /**
+     * Show the form for creating a new resource from a specific board.
+     *
+     * @param Board $board : le board pour lequel on crée une tâche
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function createFromBoard(Board $board)
+    {
+        //
+        $user = Auth::user();
+        $categories = Category::all();
+        return view('boards.tasks.create', ["user" => $user, "categories" => $categories, 'board' => $board]); 
+    }
+
+    /**
+     * Store a newly created resource in storage for a given board.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Board $board le board depuis/pour lequel on créé la tâche
+     * @return \Illuminate\Http\Response
+     */
+    public function storeFromBoard(Request $request, Board $board)
+    {
+        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255', 
+            'description' => 'max:4096', 
+            'due_date' => 'required|date|after:today',
+            'category_id' => 'default:null|integer|exists:categories,id',
+        ]);
+        // TODO : il faut vérifier que le board appartient bien à l'utilisateur :(
+        $validatedData['board_id'] = $board->id; 
+        Task::create($validatedData); // Nouvelle méthode création, sans avoir à affecter propriété par propriété
+    }
+
     /**
      * Display the specified resource.
      *
@@ -67,7 +96,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('tasks.show', ['task' => $task]);
+        //
     }
 
     /**
@@ -79,7 +108,6 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         //
-        return view('tasks.edit', ['task' => $task]);
     }
 
     /**
@@ -92,30 +120,16 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         //
-        $validatedData = $request->validate([
-                'title' => 'required|string|max:255', 
-                'description' => 'max:4096',
-                'due_date' => ''
-            ]
-        );
-        $board->title = $validatedData['title'];
-        $board->description = $validatedData['description'];
-        $board->due_date = $validatedData['due_date'];
-        $board->update(); 
-
-        return redirect('/tasks');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Board  $task
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
     {
         //
-        $board->delete();
-        return redirect('/tasks');
     }
 }
