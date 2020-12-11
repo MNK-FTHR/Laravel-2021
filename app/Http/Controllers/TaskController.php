@@ -56,7 +56,7 @@ class TaskController extends Controller
         //$task->category_id = ; 
         //$task->board_id = ; 
         // TODO : il faut vérifier que le board appartient bien à l'utilisateur :(
-        $id = (!$user->id) ? abort(403) : $task->save() ;
+        $id = (!$user->id) ? abort(403) : $task->save();
         Task::create($validatedData); // Nouvelle méthode création, sans avoir à affecter propriété par propriété
     }
 
