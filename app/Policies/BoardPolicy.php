@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Board;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class BoardPolicy
 {
@@ -18,7 +19,9 @@ class BoardPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        // Pour l'instant le contrôleur n'affiche dans la fonction que les boards de l'utilisateur, donc on  renvoyer vrai quoiqu'il arrive
+        return Auth::user() == $user; 
+
     }
 
     /**
@@ -30,7 +33,9 @@ class BoardPolicy
      */
     public function view(User $user, Board $board)
     {
-        //
+        // La règle est qu'un utilisateur doit être participant du board pour le voir
+        return $board->users->find($user->id) != null;
+        //return true; 
     }
 
     /**
@@ -42,6 +47,7 @@ class BoardPolicy
     public function create(User $user)
     {
         //
+        return Auth::user() == $user; 
     }
 
     /**
@@ -53,7 +59,8 @@ class BoardPolicy
      */
     public function update(User $user, Board $board)
     {
-        //
+        // Seul le propriétaire du board peut mettre à jour
+        return $user->id  === $board->user_id; //$user->id  === $board->owner->id;
     }
 
     /**
@@ -65,7 +72,9 @@ class BoardPolicy
      */
     public function delete(User $user, Board $board)
     {
-        //
+        
+        // Seul le propriétaire du board peut  supprimer
+        return $user->id  === $board->user_id; //$user->id  === $board->owner->id;
     }
 
     /**
