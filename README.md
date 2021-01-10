@@ -69,3 +69,11 @@ Un blog très pertinent  : http://laravel.sillo.org/
 ## Le mcd de l'application
 
 [mcd]: https://raw.githubusercontent.com/NF-yac/todo-b2-20-21/master/database/mcd/todo.svg "MCD de l'application"
+
+
+### Notes
+J'ai essayé d'ajouter les commentaires tant bien que mal, j'ai fait les routes sans trop savoir, rien ne fonctionne comme il faut j'ai pas eu le temps de trop faire le front.
+
+J'ai amélioré l'utilisation de l'application niveau board et tâches.
+
+C'était difficile je me suis beaucoup perdu et je ne comprend pas tout dans ce projet malgrès le fait qu'il y ait des exemple de part les autres parties de l'application. 

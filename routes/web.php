@@ -43,3 +43,8 @@ Route::resource("/boards/{board}/tasks", TaskController::class)->middleware('aut
 Route::post('boards/{board}/users', [BoardUserController::class, 'store'])->middleware('auth')->name('boards.users.store');
 Route::delete('boarduser/{BoardUser}', [BoardUserController::class, 'destroy'])->middleware('auth')->name('boards.users.destroy');
 
+Route::get('/boards/{board}/tasks/{task}/comments/{comment}', [CommentController::class, 'show'])->middleware('auth')->name('boards.tasks.comment.show');
+Route::get('/boards/{board}/tasks/{task}/comments/{comment}/edit', [CommentController::class, 'edit'])->middleware('auth')->name('boards.tasks.comment.show');
+Route::post('/boards/{board}/tasks/{task}/comments/{comment}', [CommentController::class, 'store'])->middleware('auth')->name('boards.tasks.comment.show');
+//Route::get('/boards/{board}/tasks/{task}/comments/{comment}', [CommentController::class, 'update'])->middleware('auth')->name('boards.tasks.comment.show');
+//Route::get('/boards/{board}/tasks/{task}/comments/{comment}', [CommentController::class, 'destroy'])->middleware('auth')->name('boards.tasks.comment.show');

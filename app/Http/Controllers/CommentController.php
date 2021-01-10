@@ -24,7 +24,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('boards.tasks.comment.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('boards.tasks.comments.edit', ['comment' => $comment]);
     }
 
     /**
@@ -80,6 +80,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect('/boards/{board}/tasks/{task}');
     }
 }
