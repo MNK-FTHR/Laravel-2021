@@ -10,12 +10,4 @@
     @foreach ($task->assignedUsers as $users)
         <p>{{$user->email}} : {{$user->name}}</p>
     @endforeach
-    <!-- <div>
-        <p>Commentaires:</p>
-        @forelse ($comments as $comment)
-        <p>{{$comment->text}}</p>
-        @empty
-            <p>pas de com</p>
-        @endforelse
-    </div> -->
 @endsection
